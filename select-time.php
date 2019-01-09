@@ -2,6 +2,15 @@
 require_once "includes/database.php";
 
 // Maak een array met tijden van 09:00 - 17:00 met stappen van 15 minuten.
+$times = [];
+$time = strtotime('09:00');
+// loop (while of for loop)
+while($time <= strtotime('17:00')) {
+    // time toevoegen aan times array
+    $times[] = date('H:i', $time);
+    // time + een kwartier
+    $time += 60 * 15;
+}
 
 if(isset($_POST['submit'])) {
     //Postback with the data showed to the user, first retrieve data from 'Super global'
@@ -58,6 +67,28 @@ if(isset($_GET['date']) && !empty($_GET['date'])) {
     // Doorloop alle reserveringen en filter alle tijden die gelijk zijn
     // aan de tijd van een reservering t/m een uur later.
     // Zet alle overgebleven tijden in de array $availableTimes.
+    $availableTimes = [];
+
+    foreach ($times as $time)
+    {
+        $occurs = false;
+        $time = strtotime($time);
+        foreach ($reservations as $reservation)
+        {
+            $reservationStart = strtotime($reservation['time']);
+            if( $time >= $reservationStart &&
+                $time < $reservationStart + 60 * 60) {
+                // wat is hier aan de hand?
+                $occurs = true;
+            }
+        }
+
+        if (!$occurs) {
+            $availableTimes[] = date('H:i', $time);
+        }
+    }
+
+
 } else {
     header('Location: select-date.php');
 }
