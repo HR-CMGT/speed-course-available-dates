@@ -27,6 +27,7 @@ mysqli_close($db);
 <h1>Alle reserveringen</h1>
 
 <a href="select-date.php">Nieuwe reservering</a>
+<a href="select-date-ajax.php">Nieuwe reservering (met Ajax)</a>
 <table>
     <thead>
     <tr>
