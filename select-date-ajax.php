@@ -68,7 +68,6 @@ if(isset($_POST['submit'])) {
         </select>
         <span class="errors"><?= isset($errors['time']) ? $errors['time'] : '' ?></span>
     </div>
-    <input type="hidden" name="date" value="<?= $date ?>"/>
     <div class="data-submit">
         <input type="submit" name="submit" value="Save"/>
     </div>
