@@ -5,9 +5,10 @@ In deze Speed Course wordt behandeld hoe je tijden kunt filteren die niet beschi
 
 ## Bestanden
 - index.php (overzicht van alle reserveringen)
+- index_advanced.php (Events in een calendar view, nieuw event met AJAX request)
 - select-date.php (voor het selecteren van een datum)
 - select-time.php (op deze pagina vindt de filtering plaats en hier zal uiteindelijk de reservering kunnen worden afgerond.)
-- available_dates.sql (dump van de database)
+- planning_system.sql (dump van de database)
 
 ## Werkwijze
 - Clone deze repository in de htdocs map van XAMPP middels  
@@ -19,4 +20,3 @@ In deze Speed Course wordt behandeld hoe je tijden kunt filteren die niet beschi
 ## Opdracht
 - Maak select-time.php werkend  
   Vul de code aan onder de commentaarregels.
-

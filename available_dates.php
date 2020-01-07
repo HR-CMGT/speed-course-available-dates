@@ -9,19 +9,21 @@ require_once "includes/database.php";
 
 $times = [];
 $time = strtotime('09:00');
+$timeToAdd = 30;
+
 while($time <= strtotime('17:00')) {
 
     $times[] = date('H:i', $time);
-    $time += 60 * 15;
+    $time += 60 * $timeToAdd;
 }
 
 $date = mysqli_escape_string($db, $_GET['date']);
 
 $query = "SELECT *
-          FROM reservations
+          FROM planning_system.reservations
           WHERE date = '$date'";
 
-$result = $db->query($query);
+$result = $db->query($query) or die('Error: '.mysqli_error($db). 'QUERY: '.$query);
 
 if ($result) {
     $reservations = [];
@@ -37,8 +39,10 @@ foreach ($times as $time)
     $time = strtotime($time);
     foreach ($reservations as $reservation)
     {
-        $reservationStart = strtotime($reservation['time']);
-        if($time >=  $reservationStart && $time <  $reservationStart + 60 * 60) {
+        $reservationStart = strtotime($reservation['start_time']);
+        $reservationEnd     = strtotime($reservation['end_time']);
+
+        if($time >=  $reservationStart && $time <  $reservationEnd) {
             $occurs = true;
         }
     }

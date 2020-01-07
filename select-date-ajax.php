@@ -6,15 +6,16 @@ if(isset($_POST['submit'])) {
     $name = mysqli_real_escape_string($db, $_POST['name']);
     $time = mysqli_real_escape_string($db, $_POST['time']);
     $date = mysqli_escape_string($db, $_POST['date']);
+    $endTime = date('H:i', strtotime($time . ' 1hour'));
 
     //Require the form validation handling
     require_once "includes/form-validation.php";
 
     if (empty($errors)) {
         //Save the record to the database
-        $query = "INSERT INTO reservations
-                  (name, date, time)
-                  VALUES ('$name', '$date', '$time')";
+        $query = "INSERT INTO planning_system.reservations
+                  (description, date, start_time, end_time)
+                  VALUES ('$name', '$date', '$time', '$endTime')";
         $result = mysqli_query($db, $query);
 
         if ($result) {
@@ -73,10 +74,6 @@ if(isset($_POST['submit'])) {
     </div>
 </form>
 
-<script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 require_once "includes/database.php";
 
 $query = "SELECT *
-          FROM reservations";
+          FROM planning_system.reservations";
 
 $result = mysqli_query($db, $query);
 
@@ -24,30 +24,34 @@ mysqli_close($db);
     <link rel="stylesheet" type="text/css" href="css/style.css"/>
 </head>
 <body>
-<h1>Alle reserveringen</h1>
+    <h1>Alle reserveringen</h1>
 
-<a href="select-date.php">Nieuwe reservering</a>
-<a href="select-date-ajax.php">Nieuwe reservering (met Ajax)</a>
-<table>
-    <thead>
-    <tr>
-        <th>#</th>
-        <th>Naam</th>
-        <th>Datum</th>
-        <th>Tijd</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($reservations as $index => $reservation) {
-        ?>
+    <a href="select-date.php">Nieuwe reservering</a>
+
+
+    <table>
+        <thead>
         <tr>
-            <td><?= $index + 1?></td>
-            <td><?= $reservation['name']; ?></td>
-            <td><?= $reservation['date']; ?></td>
-            <td><?= $reservation['time']; ?></td>
+            <th>#</th>
+            <th>Naam</th>
+            <th>Datum</th>
+            <th>Start</th>
+            <th>Eind</th>
         </tr>
-    <?php } ?>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        <?php foreach ($reservations as $index => $reservation) {
+            ?>
+            <tr>
+                <td><?= $index + 1?></td>
+                <td><?= $reservation['description']; ?></td>
+                <td><?= $reservation['date']; ?></td>
+                <td><?= $reservation['start_time']; ?></td>
+                <td><?= $reservation['end_time']; ?></td>
+            </tr>
+        <?php } ?>
+        </tbody>
+    </table>
+    <a href="index_advanced.php">Advanced calendar view (met Ajax)</a>
 </body>
 </html>
