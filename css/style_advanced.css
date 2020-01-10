@@ -15,6 +15,7 @@ form input,select{
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+    height: 35px;
 }
 .column {
     display: flex;
@@ -24,8 +25,28 @@ form input,select{
     text-align: center;
 }
 event {
-    border: 1px solid red;
+    font-size: 0.8em;
+    border: 1px solid blue;
     border-radius: 10px;
-    margin: 3px;
+    margin: 0px 3px;
+    padding-bottom: 5px;
+    background-color: rgba(52,169,231,0.35);
+}
+event div{
+
+    text-align: left;
+    padding: 5px 0px 0px 5px;
+}
+event header{
+    background-color: blue;
+    color: white;
+    padding: 3px 0;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.border-top-gray{
+    border-top: 1px solid rgba(231,120,114,0.23);
 }
 

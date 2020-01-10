@@ -1,5 +1,9 @@
+<?php
+$start  = date('H:i', strtotime($reservation['start_time']));
+$end    = date('H:i', strtotime($reservation['end_time']));
+?>
 <event>
-    <h3><?= $reservation['description'] ?></h3>
-    <p><?= $reservation['date'] ?>
-    <br><?= $reservation['start_time']?> - <?= $reservation['end_time']?></p>
+    <header><?= $reservation['description'] ?></header>
+    <div><?= $start ?> - <?= $end ?></div>
+    <div><?= $reservation['description'] ?></div>
 </event>

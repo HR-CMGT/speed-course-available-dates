@@ -6,16 +6,9 @@
  * Time: 16:15
  */
 require_once "includes/database.php";
+require_once "helpers/calendar_helper.php";
 
-$times = [];
-$time = strtotime('09:00');
-$timeToAdd = 30;
-
-while($time <= strtotime('17:00')) {
-
-    $times[] = date('H:i', $time);
-    $time += 60 * $timeToAdd;
-}
+$times = createArrayWithTimes('09:00', '17:00', 30);
 
 $date = mysqli_escape_string($db, $_GET['date']);
 
@@ -32,25 +25,9 @@ if ($result) {
     }
 }
 
-$availableTimes = [];
-foreach ($times as $time)
-{
-    $occurs = false;
-    $time = strtotime($time);
-    foreach ($reservations as $reservation)
-    {
-        $reservationStart = strtotime($reservation['start_time']);
-        $reservationEnd     = strtotime($reservation['end_time']);
 
-        if($time >=  $reservationStart && $time <  $reservationEnd) {
-            $occurs = true;
-        }
-    }
+$availableTimes = filterTimesAndEvents($times, $reservations);
 
-    if(!$occurs) {
-        $availableTimes[] = date('H:i', $time);
-    }
-}
 
 header("Content-type: application/json");
 echo json_encode($availableTimes);

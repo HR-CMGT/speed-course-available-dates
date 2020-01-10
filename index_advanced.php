@@ -1,5 +1,6 @@
 <?php
 require_once 'includes/database.php';
+require_once 'helpers/calendar_helper.php';
 
 // A date begin of the week. Start of the week is on Sunday.
 $date = '2020-01-05';
@@ -16,8 +17,6 @@ while($row = mysqli_fetch_assoc($result))
 {
     $reservations[] = $row;
 }
-
-
 
 setlocale(LC_ALL, 'nl_NL');
 
@@ -58,6 +57,10 @@ if(isset($_POST['submit'])) {
     header('Location: index_advanced.php');
 }
 mysqli_close($db);
+
+$times = createArrayWithTimes('09:00', '17:00', 30);
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -71,26 +74,39 @@ mysqli_close($db);
 </head>
 <body>
     <div class="row">
-
-        <?php for($i = 0 ; $i < 6 ; $i++) {?>
-
-        <div class="column">
-            <b><?= strftime('%A', strtotime($date ." + $i days")) ?></b>
-            <div><?= date('j F', strtotime($date ." + $i days")) ?></div>
-
-            <?php foreach($reservations as $reservation) { ?>
-
-                <?php if(date('N', strtotime($reservation['date'])) == $i) {?>
-                    <?php include 'templates/template_event.php' ?>
-                <?php } ?>
-
-            <?php } ?>
-
-        </div>
-
-        <?php } ?>
+        <?php for($i = 0 ; $i < 7 ; $i++) : ?>
+            <div class="column">
+                <b><?= strftime('%A', strtotime($date ." + $i days")) ?></b>
+                <div><?= date('j F', strtotime($date ." + $i days")) ?></div>
+            </div>
+        <?php endfor; ?>
     </div>
 
+    <?php foreach ($times as $row => $time) : ?>
+        <div class="row">
+
+            <?php for($i = -1 ; $i < 7 ; $i++) : ?>
+
+                <?php if($i == -1) : ?>
+                    <div><?= $time ?></div>
+                <?php else : ?>
+                    <div class="column border-top-gray">
+                        <?php foreach($reservations as $reservation) : ?>
+
+                            <?php if(date('N', strtotime($reservation['date'])) == $i && strtotime($time) == strtotime($reservation['start_time'])) : ?>
+                                <?php include 'templates/template_event.php' ?>
+                            <?php endif; ?>
+
+                        <?php endforeach; ?>
+
+                    </div>
+                <?php endif; ?>
+            <?php endfor; ?>
+
+        </div>
+    <?php endforeach; ?>
+
+    <!--    NEW EVENT   -->
     <div class="row">
         <div class="column">
             <h2>Nieuw event</h2>
