@@ -1,9 +1,11 @@
 <?php
 
 /**
+ * The actual times for our calendar view
+ *
  * @return string[]
  */
-function getRosterItems(): array
+function getRosterTimes(): array
 {
     return ['9:00', '9:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00'];
 }
@@ -37,7 +39,7 @@ function getWeekDays(int $timestamp): array
 }
 
 /**
- * Format the event so we can use it in our calendar view
+ * Format the event, so we can use it in our calendar view
  *
  * @param array $event
  * @return array
@@ -52,7 +54,8 @@ function formatEvent(array $event): array
     $dayNumber = (int)date('w', strtotime($event['date']));
     $event['day_number'] = $dayNumber === 0 ? 7 : $dayNumber;
 
-    $rosterItems = getRosterItems();
+    //Get the times and translate the event times to the rows in the grid
+    $rosterItems = getRosterTimes();
     $event['row_start'] = array_search($event['start_time'], $rosterItems) + 2;
     $event['row_span'] = array_search($event['end_time'], $rosterItems) + 2 - $event['row_start'];
 

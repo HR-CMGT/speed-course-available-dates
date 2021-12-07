@@ -14,8 +14,11 @@ $weekDays = getWeekDays($timestampWeek);
 //Get the month that belongs to the monday of that week
 $monthOfWeek = date('F', $weekDays[0]['timestamp']);
 
+//Get the year that belongs to the monday of that week
+$yearOfWeek = date('Y', $weekDays[0]['timestamp']);
+
 //The actual times visible in the calendar view
-$rosterTimes = getRosterItems();
+$rosterTimes = getRosterTimes();
 
 //The events from the database that are in this week
 $events = getEvents($weekDays[0]['fullDate'], $weekDays[6]['fullDate']);
@@ -45,7 +48,7 @@ $events = getEvents($weekDays[0]['fullDate'], $weekDays[6]['fullDate']);
 <div class="container">
     <div class="title">
         <a href="?week=<?= $selectedWeek - 1 ?>">Vorige week</a>
-        <span><?= $monthOfWeek; ?></span>
+        <span><?= $monthOfWeek . ' ' . $yearOfWeek; ?></span>
         <a href="?week=<?= $selectedWeek + 1 ?>">Volgende week</a>
     </div>
     <div class="days">
