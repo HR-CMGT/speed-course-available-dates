@@ -3,8 +3,8 @@ require_once 'includes/database.php';
 require_once 'helpers/calendar_helper.php';
 
 // A date begin of the week. Start of the week is on Sunday.
-$date = '2020-01-05';
-$enddate = '2020-01-12';
+$date = date('Y-m-d');
+$enddate = date('Y-m-d', strtotime('+1 week'));
 $query = "SELECT * 
           FROM planning_system.reservations 
           WHERE date >= '$date' AND date <= '$enddate'
@@ -76,8 +76,7 @@ $times = createArrayWithTimes('09:00', '17:00', 30);
     <div class="row">
         <?php for($i = 0 ; $i < 7 ; $i++) : ?>
             <div class="column">
-                <b><?= strftime('%A', strtotime($date ." + $i days")) ?></b>
-                <div><?= date('j F', strtotime($date ." + $i days")) ?></div>
+                <div><?= date('l j F', strtotime($date ." + $i days")) ?></div>
             </div>
         <?php endfor; ?>
     </div>
@@ -92,8 +91,7 @@ $times = createArrayWithTimes('09:00', '17:00', 30);
                 <?php else : ?>
                     <div class="column border-top-gray">
                         <?php foreach($reservations as $reservation) : ?>
-
-                            <?php if(date('N', strtotime($reservation['date'])) == $i && strtotime($time) == strtotime($reservation['start_time'])) : ?>
+                            <?php if(date('N', strtotime($reservation['date'])) == date('N', strtotime('+'.$i.' day')) && strtotime($time) == strtotime($reservation['start_time'])) : ?>
                                 <?php include 'templates/template_event.php' ?>
                             <?php endif; ?>
 
