@@ -1,4 +1,5 @@
 <?php
+/** @var mysqli $db */
 require_once 'includes/database.php';
 require_once 'helpers/calendar_helper.php';
 
@@ -73,10 +74,15 @@ $times = createArrayWithTimes('09:00', '17:00', 30);
     <link rel="stylesheet" href="css/style_advanced.css"/>
 </head>
 <body>
-    <div class="row">
+    <div class="row head">
+        <div class="first"><?= date('M', strtotime($date)) ?></div>
         <?php for($i = 0 ; $i < 7 ; $i++) : ?>
             <div class="column">
-                <div><?= date('l j F', strtotime($date ." + $i days")) ?></div>
+                <div>
+                    <?= date('D', strtotime($date ." + $i days")) ?>
+                    <br>
+                    <?= date('j', strtotime($date ." + $i days")) ?>
+                </div>
             </div>
         <?php endfor; ?>
     </div>
@@ -87,7 +93,7 @@ $times = createArrayWithTimes('09:00', '17:00', 30);
             <?php for($i = -1 ; $i < 7 ; $i++) : ?>
 
                 <?php if($i == -1) : ?>
-                    <div><?= $time ?></div>
+                    <div class="time"><?= $time ?></div>
                 <?php else : ?>
                     <div class="column border-top-gray">
                         <?php foreach($reservations as $reservation) : ?>

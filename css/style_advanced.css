@@ -1,6 +1,6 @@
 html {
     margin: 0;
-    font-family: sans-serif;
+    font-family: "Open Sans", sans-serif;
     font-size: 14px;
 }
 form label{
@@ -10,12 +10,18 @@ form label{
 form input,select{
     font-size: 1em;
 }
+.head {
+    font-size: 1.5em;
+}
 .row {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
     height: 35px;
+}
+.row.head{
+    height: 3em;
 }
 .column {
     display: flex;
@@ -24,18 +30,25 @@ form input,select{
 
     text-align: center;
 }
+.first {
+    width: 38px;
+}
+.row .time {
+    margin-top: -8px;
+    margin-right: 5px;
+}
 event {
     font-size: 0.8em;
     border: 1px solid blue;
     border-radius: 10px;
-    margin: 0px 3px;
+    margin: 0 3px;
     padding-bottom: 5px;
     background-color: rgba(52,169,231,0.35);
 }
 event div{
 
     text-align: left;
-    padding: 5px 0px 0px 5px;
+    padding: 5px 0 0 5px;
 }
 event header{
     background-color: blue;
