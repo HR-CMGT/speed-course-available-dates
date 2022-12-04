@@ -4,13 +4,14 @@ let dataElement = document.getElementById("date");
 // if the date is changed
 dataElement.addEventListener("change", addAvailableDatesToDropdown)
 
-async function addAvailableDatesToDropdown(element) {
+async function addAvailableDatesToDropdown(element)
+{
     // retrieve the selected date
     let selectedDate = element.target.value;
     let timeDropDown = document.getElementById('time');
 
     // retrieve available dates via a ajax request
-    let response = await fetch("available_dates.php?date="+selectedDate)
+    let response = await fetch("available_dates.php?date=" + selectedDate)
     // retrieve the json result
     const json = await response.json();
 
@@ -18,7 +19,7 @@ async function addAvailableDatesToDropdown(element) {
     timeDropDown.innerHTML = '';
 
     // add all available dates to the dropdown
-    for(let item of json) {
+    for (let item of json) {
         let optionElement = document.createElement('option')
         optionElement.setAttribute('value', item)
         optionElement.innerHTML = item
@@ -26,13 +27,3 @@ async function addAvailableDatesToDropdown(element) {
         timeDropDown.appendChild(optionElement)
     }
 }
-
-
-
-
-
-
-
-
-
-

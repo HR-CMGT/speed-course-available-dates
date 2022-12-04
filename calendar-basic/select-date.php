@@ -3,7 +3,7 @@
 <head>
     <title>Nieuwe reservering - datum</title>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
 </head>
 <body>
 <h1>Maak een nieuwe reservering aan</h1>
