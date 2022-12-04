@@ -10,7 +10,6 @@ body {
     width: 100%;
     display: grid;
     grid-template-rows: 3em 3em auto;
-    position: absolute;
 }
 
 .title {
