@@ -33,15 +33,7 @@ $events = getEvents($weekDays[0]['fullDate'], $weekDays[6]['fullDate']);
     <!-- From: https://codepen.io/kjellmf/pen/qgxyVJ -->
     <link href="css/normalize.css" rel="stylesheet" type="text/css"/>
     <link href="css/style.css" rel="stylesheet" type="text/css"/>
-    <style>
-        .content {
-            grid-template-rows: repeat(<?= count($rosterTimes); ?>, 2em);
-        }
-
-        .col {
-            grid-row: 1/span<?= count($rosterTimes); ?>;
-        }
-    </style>
+    <style><?= getDynamicCSS($rosterTimes, $events); ?></style>
 </head>
 <body>
 
@@ -61,25 +53,20 @@ $events = getEvents($weekDays[0]['fullDate'], $weekDays[6]['fullDate']);
         <?php } ?>
     </div>
     <div class="content">
-        <?php foreach ($rosterTimes as $index => $rosterTime) { ?>
-            <div class="time" style="grid-row:<?= $index + 1; ?>"><?= $rosterTime; ?></div>
-        <?php } ?>
         <div class="filler-col"></div>
-        <div class="col" style="grid-column:3"></div>
-        <div class="col" style="grid-column:4"></div>
-        <div class="col" style="grid-column:5"></div>
-        <div class="col" style="grid-column:6"></div>
-        <div class="col" style="grid-column:7"></div>
-        <div class="col weekend" style="grid-column:8"></div>
-        <div class="col weekend" style="grid-column:9"></div>
-        <?php for ($i = 0; $i < count($rosterTimes); $i++) { ?>
-            <div class="row" style="grid-row:<?= $i + 1; ?>"></div>
+        <div class="col monday"></div>
+        <div class="col tuesday"></div>
+        <div class="col wednesday"></div>
+        <div class="col thursday"></div>
+        <div class="col friday"></div>
+        <div class="col weekend saturday"></div>
+        <div class="col weekend sunday"></div>
+        <?php foreach ($rosterTimes as $index => $rosterTime) { ?>
+            <div class="time row-roster-<?= $index + 1; ?>"><?= $rosterTime; ?></div>
+            <div class="row row-roster-<?= $index + 1; ?>"></div>
         <?php } ?>
         <?php foreach ($events as $event) { ?>
-            <a href="" class="event" style="
-                    grid-column: <?= $event['day_number'] + 2; ?>;
-                    grid-row: <?= $event['row_start']; ?>/span <?= $event['row_span']; ?>;
-                    "><?= $event['description']; ?></a>
+            <a href="" class="event event-item-<?= $event['id']; ?>"><?= $event['description']; ?></a>
         <?php } ?>
     </div>
 </div>

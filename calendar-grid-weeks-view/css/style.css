@@ -71,6 +71,28 @@ body {
     grid-column: span 1;
 }
 
+.col.monday {
+    grid-column: 3;
+}
+.col.tuesday {
+    grid-column: 4;
+}
+.col.wednesday {
+    grid-column: 5;
+}
+.col.thursday {
+    grid-column: 6;
+}
+.col.friday {
+    grid-column: 7;
+}
+.col.saturday {
+    grid-column: 8;
+}
+.col.sunday {
+    grid-column: 9;
+}
+
 .filler-col {
     grid-row: 1/-1;
     grid-column: 2;

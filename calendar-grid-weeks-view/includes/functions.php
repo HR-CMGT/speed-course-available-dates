@@ -89,3 +89,49 @@ function getEvents(string $from, string $to): array
 
     return $events;
 }
+
+/**
+ * To prevent too much clutter of PHP-in-CSS within index.php, we'll use this function
+ * This creates classes that are later used in the actual HTML
+ *
+ * @param array $rosterTimes
+ * @param array $events
+ * @return string
+ */
+function getDynamicCSS(array $rosterTimes, array $events): string
+{
+    //First make sure grid & rows are set for the total timeslots we have
+    $totalRosterTimes = count($rosterTimes);
+    $css = <<<CSS
+        .content {
+            grid-template-rows: repeat({$totalRosterTimes}, 2em);
+        }
+
+        .col {
+            grid-row: 1 / span {$totalRosterTimes};
+        }
+CSS;
+
+    //Create the actual row-styling based on total items we have
+    foreach ($rosterTimes as $index => $rosterTime) {
+        $rowNumber = $index + 1;
+        $css .= <<<CSS
+            .row-roster-{$rowNumber} {
+                grid-row: {$rowNumber};
+            }
+CSS;
+    }
+
+    //Create the styling for every event to give it a unique position in the grid
+    foreach ($events as $event) {
+        $dayNumber = $event['day_number'] + 2;
+        $css .= <<<CSS
+            .event-item-{$event['id']} {
+                grid-column: {$dayNumber};
+                grid-row: {$event['row_start']} / span {$event['row_span']};
+            }
+CSS;
+    }
+
+    return $css;
+}

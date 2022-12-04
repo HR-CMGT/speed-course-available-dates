@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>PHP reserveringsoverzicht mogelijkheden</title>
+    <title>PHP: reserveringsoverzicht mogelijkheden</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 </head>
 <body>
 <section class="section">
     <div class="content">
         <h1 class="title is-2">
-            PHP reserveringsoverzicht mogelijkheden
+            PHP: reserveringsoverzicht mogelijkheden
         </h1>
         <p class="mb-4">
             Voor het reserveringssysteem is de kans groot dat je zelf aan de slag wilt gaan met het bouwen van een mooi overzicht van
