@@ -4,13 +4,13 @@
 require_once '../includes/database.php';
 require_once '../includes/functions.php';
 
-// A date begin of the week. Start of the week is on Sunday.
+//Date of today & date of the day in 1 week
 $date = date('Y-m-d');
-$enddate = date('Y-m-d', strtotime('+1 week'));
+$endDate = date('Y-m-d', strtotime('+1 week'));
 
 $query = "SELECT * 
           FROM planning_system.reservations 
-          WHERE date >= '$date' AND date <= '$enddate'
+          WHERE date >= '$date' AND date <= '$endDate'
           ORDER BY start_time ASC";
 $result = mysqli_query($db, $query) or die('Error ' . mysqli_error($db) . ' with query ' . $query);
 
@@ -18,8 +18,6 @@ $reservations = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $reservations[] = $row;
 }
-
-setlocale(LC_ALL, 'nl_NL');
 
 if (isset($_POST['submit'])) {
     //Postback with the data showed to the user, first retrieve data from 'Super global'
@@ -58,7 +56,7 @@ if (isset($_POST['submit'])) {
 }
 mysqli_close($db);
 
-$times = createArrayWithTimes('09:00', '17:00', 30);
+$times = createArrayWithTimes('09:00', '17:00');
 ?>
 <!doctype html>
 <html lang="en">
@@ -74,7 +72,7 @@ $times = createArrayWithTimes('09:00', '17:00', 30);
 <body>
 <div class="row head">
     <div class="first"><?= date('M', strtotime($date)) ?></div>
-    <?php for ($i = 0; $i < 7; $i++) : ?>
+    <?php for ($i = 0; $i < 7; $i++) { ?>
         <div class="column">
             <div>
                 <?= date('D', strtotime($date . " + $i days")) ?>
@@ -82,15 +80,15 @@ $times = createArrayWithTimes('09:00', '17:00', 30);
                 <?= date('j', strtotime($date . " + $i days")) ?>
             </div>
         </div>
-    <?php endfor; ?>
+    <?php } ?>
 </div>
 
-<?php foreach ($times as $row => $time) : ?>
+<?php foreach ($times as $row => $time) { ?>
     <div class="row">
-        <?php for ($i = -1; $i < 7; $i++) : ?>
-            <?php if ($i == -1) : ?>
+        <?php for ($i = -1; $i < 7; $i++) { ?>
+            <?php if ($i == -1) { ?>
                 <div class="time"><?= $time ?></div>
-            <?php else : ?>
+            <?php } else { ?>
                 <div class="column border-top-gray">
                     <?php foreach ($reservations as $reservation) : ?>
                         <?php if (date('N', strtotime($reservation['date'])) == date('N', strtotime('+' . $i . ' day')) && strtotime($time) == strtotime($reservation['start_time'])) : ?>
@@ -98,10 +96,10 @@ $times = createArrayWithTimes('09:00', '17:00', 30);
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
-            <?php endif; ?>
-        <?php endfor; ?>
+            <?php } ?>
+        <?php } ?>
     </div>
-<?php endforeach; ?>
+<?php } ?>
 
 <!--    NEW EVENT   -->
 <div class="row">

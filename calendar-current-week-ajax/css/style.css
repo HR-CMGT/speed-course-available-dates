@@ -3,16 +3,20 @@ html {
     font-family: "Open Sans", sans-serif;
     font-size: 14px;
 }
-form label{
+
+form label {
     width: 200px;
     margin-right: 10px;
 }
-form input,select{
+
+form input, select {
     font-size: 1em;
 }
+
 .head {
     font-size: 1.5em;
 }
+
 .row {
     display: flex;
     flex-direction: row;
@@ -20,9 +24,11 @@ form input,select{
     width: 100%;
     height: 35px;
 }
-.row.head{
+
+.row.head {
     height: 3em;
 }
+
 .column {
     display: flex;
     flex-direction: column;
@@ -30,27 +36,31 @@ form input,select{
 
     text-align: center;
 }
+
 .first {
     width: 38px;
 }
+
 .row .time {
     margin-top: -8px;
     margin-right: 5px;
 }
-event {
+
+.event {
     font-size: 0.8em;
     border: 1px solid blue;
     border-radius: 10px;
     margin: 0 3px;
     padding-bottom: 5px;
-    background-color: rgba(52,169,231,0.35);
+    background-color: rgba(52, 169, 231, 0.35);
 }
-event div{
 
+.event div {
     text-align: left;
     padding: 5px 0 0 5px;
 }
-event header{
+
+.event header {
     background-color: blue;
     color: white;
     padding: 3px 0;
@@ -59,7 +69,47 @@ event header{
     border-top-right-radius: 10px;
 }
 
-.border-top-gray{
-    border-top: 1px solid rgba(231,120,114,0.23);
+.event.minutes-30 {
+    height: 30px;
+    padding-bottom: 0;
+}
+
+.event.minutes-30 div {
+    display: none;
+}
+
+.event.minutes-30 header {
+    height: 21px;
+    border-radius: 10px;
+    padding-top: 9px;
+}
+
+.event.minutes-60 {
+    height: 67px;
+    padding-bottom: 0;
+}
+
+.event.minutes-90 {
+    height: 102px;
+    padding-bottom: 0;
+}
+
+.event.minutes-120 {
+    height: 137px;
+    padding-bottom: 0;
+}
+
+.event.minutes-150 {
+    height: 173px;
+    padding-bottom: 0;
+}
+
+.event.minutes-180 {
+    height: 207px;
+    padding-bottom: 0;
+}
+
+.border-top-gray {
+    border-top: 1px solid rgba(231, 120, 114, 0.23);
 }
 
