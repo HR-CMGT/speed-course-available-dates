@@ -33,34 +33,23 @@ if (isset($_POST['submit'])) {
 
 if (isset($_GET['date']) && !empty($_GET['date'])) {
     // Haal de datum op
-    $date = mysqli_escape_string($db, $_GET['date']);
+    $date = '';
 
     // Haal de reserveringen uit de database voor een specifieke datum
-    $query = "SELECT *
-              FROM reservations
-              WHERE date = '$date'";
 
-    $result = mysqli_query($db, $query);
-
-    if ($result) {
-        $reservations = [];
-        while ($row = mysqli_fetch_assoc($result)) {
-            $reservations[] = $row;
-        }
-    }
     // Maak een array met tijden van 09:00 - 17:00 met stappen van 30 minuten.
     $times = [];
     $time = strtotime('09:00');
     $timeToAdd = 30;
 
     // Blijf de times aray vullen totdat 17:00 bereikt wordt.
-    while ($time <= strtotime('17:00')) {
+
         // time toevoegen aan times array
-        $times[] = date('H:i', $time);
+
 
         // time + een half uur optellen
-        $time += 60 * $timeToAdd;
-    }
+
+
 
     // Doorloop alle reserveringen en filter alle tijden die gelijk zijn
     // aan de tijd van een reservering t/m een uur later.
@@ -68,26 +57,14 @@ if (isset($_GET['date']) && !empty($_GET['date'])) {
     $availableTimes = [];
 
     // doorloop alle tijden (van 9:00 - 17:00)
-    foreach ($times as $time) {
-        $time = strtotime($time);
-        $occurs = false;
+
         // controleer de tijd tegen ALLE reserveringen van die dag
-        foreach ($reservations as $reservation) {
-            $startTime = strtotime($reservation['start_time']);
-            $endTime = strtotime($reservation['end_time']);
+
             // ALS de tijd van de begintijd tot de eindtijd van
             // een reservering valt voeg deze tijd ($time) niet
             // toe aan availableTimes
-            if ($time >= $startTime &&
-                $time < $endTime) {
-                $occurs = true;
-            }
-        }
 
-        if (!$occurs) {
-            $availableTimes[] = date('H:i', $time);
-        }
-    }
+
 } else {
     header('Location: select-date.php');
 }
@@ -161,6 +138,7 @@ if (isset($_GET['date']) && !empty($_GET['date'])) {
             </div>
         </div>
     </form>
+    <a class="button mt-4" href="../index.html">&laquo; Terug naar de index</a>
 </section>
 </body>
 </html>

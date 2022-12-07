@@ -43,8 +43,35 @@
             </li>
         </ol>
         <blockquote>
-            Alle voorbeelden maken gebruik van dezelfde database. Deze kun je importeren door het <a href="planning_system.sql" download>SQL-bestand</a>
+            <h4 class="title">Import database</h4>
+            Alle voorbeelden maken gebruik van dezelfde database. Deze kun je importeren door het <a href="planning_system.sql" download>SQL-bestand</a> (planning_system.sql)
             te downloaden en te importeren binnen je phpMyAdmin omgeving.
+        </blockquote>
+
+        <h2 class="title">Oefenopdracht</h2>
+        <p class="mb-4">
+            In deze <a href="calendar-basic-exercise">opdracht</a> gaan we stapsgewijs door het aanmaken van een afspraak. Bij het maken van een
+            afspraak moeten tijden die niet meer beschikbaar zijn nie getoond worden. Voor deze opdracht heb je een database nodig. Zie "Import database" hierboven.
+            Verder zijn de pagina's <a href="calendar-basic-exercise/index.php">index.php</a> en <a href="calendar-basic-exercise/select-date.php">select-date.php</a> al klaar. Je past alleen select-time.php aan.
+        </p>
+        <h3 class="title">Interactie</h3>
+        <ol>
+            <li>Kies voor de optie om een nieuwe reservering te maken op de <a href="calendar-basic-exercise/index.php">indexpagina</a></li>
+            <li>We selecteren eerst een datum op de pagina <a href="calendar-basic-exercise/select-date.php">select-date.php</a></li>
+            <li>Op basis van de gekozen datum worden alleen de tijden opgehaald die nog beschikbaar zijn.</li>
+            <li>Als laatste kan een beschikbare tijd gekozen worden en een naam voor de afspraak meegegeven worden.</li>
+        </ol>
+        <blockquote>
+            Ga naar <code>regel 34</code> in <a href="calendar-basic-exercise/select-time.php">select-time.php</a>. Vanaf hier zal je de volgende
+            stappen moeten uitwerken.
+            <ol>
+                <li>Haal de geselecteerde datum op uit de url (GET methode)</li>
+                <li>Haal op basis van deze datum de bijbehorende reserveringen op uit de database. De connectie naar de database wordt al gemaakt op <code>regel 2</code>.</li>
+                <li>Maak (los van de reserveringen) een array met tijden van 09:00 - 17:00 met stappen van 30 minuten.</li>
+                <li>Doorloop alle reserveringen en filter alle tijden die gelijk zijn aan de tijd van een reservering t/m een uur later.</li>
+                <li>Zet alle overgebleven tijden in een array</li>
+                <li>Gebruik deze array om een dropdown te vullen</li>
+            </ol>
         </blockquote>
     </div>
 </section>

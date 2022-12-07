@@ -26,6 +26,7 @@
             </div>
         </form>
     </div>
+    <a class="button mt-4" href="../index.html">&laquo; Terug naar de index</a>
 </section>
 </body>
 </html>

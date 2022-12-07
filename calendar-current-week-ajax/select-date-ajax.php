@@ -11,9 +11,9 @@ require_once "../includes/database.php";
 if (isset($_POST['submit'])) {
     //Postback with the data showed to the user, first retrieve data from 'Super global'
     $name = mysqli_real_escape_string($db, $_POST['name']);
-    $time = mysqli_real_escape_string($db, $_POST['time']);
+    $selectedTime = mysqli_real_escape_string($db, $_POST['time']);
     $date = mysqli_escape_string($db, $_POST['date']);
-    $endTime = date('H:i', strtotime($time . ' 1hour'));
+    $endTime = date('H:i', strtotime($selectedTime . ' 1hour'));
 
     //Require the form validation handling
     require_once "../includes/form-validation.php";
@@ -22,7 +22,7 @@ if (isset($_POST['submit'])) {
         //Save the record to the database
         $query = "INSERT INTO planning_system.reservations
                   (description, date, start_time, end_time)
-                  VALUES ('$name', '$date', '$time', '$endTime')";
+                  VALUES ('$name', '$date', '$selectedTime', '$endTime')";
         $result = mysqli_query($db, $query);
 
         if ($result) {
