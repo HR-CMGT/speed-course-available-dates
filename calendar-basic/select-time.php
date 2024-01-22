@@ -53,7 +53,7 @@ if (isset($_GET['date']) && !empty($_GET['date'])) {
     $time = strtotime('09:00');
     $timeToAdd = 30;
 
-    // Blijf de times aray vullen totdat 17:00 bereikt wordt.
+    // Blijf de times array vullen totdat 17:00 bereikt wordt.
     while ($time <= strtotime('17:00')) {
         // time toevoegen aan times array
         $times[] = date('H:i', $time);
