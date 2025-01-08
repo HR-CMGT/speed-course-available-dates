@@ -1,7 +1,7 @@
 <?php
 
 // General settings
-$host = "localhost";
+$host = "127.0.0.1";
 $database = "planning_system";
 $user = "root";
 $password = "";
